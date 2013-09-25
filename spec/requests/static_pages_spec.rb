@@ -14,7 +14,7 @@ describe "StaticPages" do
 
   shared_examples_for "all static pages" do
     it { should have_selector('h1', text: heading) }
-    it { should have_selector('title', text: full_title(page_title)) }
+    it { should have_title(full_title(page_title)) }
   end
 
   describe "Home page" do
@@ -80,25 +80,25 @@ describe "StaticPages" do
 
     it "should have the title 'Contact'" do
       visit contact_path
-      page.should have_selector('title',
-                                :text => full_title('Contact'))
+      page.should have_title(full_title('Contact'))
     end
   end
 
   it "should have the right links on the layout" do
     visit root_path
     click_link "About"
-    page.should have_selector 'title', text: full_title('About Us')
+    page.should have_title(full_title('About Us'))
     click_link "Help"
-    page.should have_selector 'title', text: full_title('Help')
+    page.should have_title(full_title('Help'))
     click_link "Contact"
-    page.should have_selector 'title', text: full_title('Contact')
+    page.should have_title(full_title('Contact'))
     click_link "Home"
-    page.should have_selector 'title', text: full_title('')
+    page.should have_title(full_title(''))
     click_link "Sign up now!"
-    page.should have_selector 'title', text: full_title('Sign up')
+    page.should have_title(full_title('Sign up'))
     click_link "tvvitter"
-    page.should have_selector 'title', text: full_title('')
+    page.should have_title(full_title(''))
+
   end
 
 end

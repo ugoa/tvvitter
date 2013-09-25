@@ -34,7 +34,8 @@ describe "Authentication" do
 
       before { valid_sign_in user }
 
-      it { should have_selector('title', text: user.name) }
+      it { should have_title(user.name) }
+
       it { should have_link('Users', href: users_path) }
       it { should have_link('Profile', href: user_path(user)) }
       it { should have_link('Settings', href: edit_user_path(user)) }
@@ -129,7 +130,7 @@ describe "Authentication" do
 
         describe do
           it "should render the desired protected page" do
-            page.should have_selector('title', text: 'Edit user')
+            page.should have_title('Edit user')
           end
         end
       end

@@ -47,11 +47,11 @@ describe User do
     it { should be_admin }
   end
 
-  describe "unaccessible attributes" do
+  pending "unaccessible attributes" do
     it 'should not allow access to :admin' do
       expect do
         User.new(amdin: true)
-      end.should raise_error(ActiveModel::MassAssignmentSecurity::Error)
+      end.to raise_error(ActiveModel::ForbiddenAttributesProtection)
     end
   end
 
@@ -61,11 +61,11 @@ describe User do
     # #let only spring into existence when referenced, so we use #let! to
     # make the tvveet exist immediately.
     let!(:older_tvveet) do
-      Factory.create(:tvveet, user: @user, created_at: 1.day.ago)
+      FactoryGirl.create(:tvveet, user: @user, created_at: 1.day.ago)
     end
 
     let!(:newer_tvveet) do
-      Factory.create(:tvveet, user: @user, created_at: 1.hour.ago)
+      FactoryGirl.create(:tvveet, user: @user, created_at: 1.hour.ago)
     end
 
     it "should have the right tvveets in right order" do
@@ -76,7 +76,7 @@ describe User do
       tvveets = @user.tvveets
       @user.destroy
       tvveets.each do |tvveet|
-        Tvveet.find_by_id(tvveet.id).should be_nil
+        Tvveet.find_by(id: tvveet.id).should be_nil
       end
     end
 
@@ -177,7 +177,7 @@ describe User do
 
   describe "return value of authenticate method" do
     before { @user.save }
-    let(:found_user) { User.find_by_email(@user.email) }
+    let(:found_user) { User.find_by(email: @user.email) }
 
     describe "with valid password" do
       it { should == found_user.authenticate(@user.password) }

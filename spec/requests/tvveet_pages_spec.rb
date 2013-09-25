@@ -13,7 +13,7 @@ describe "Tvveet pages" do
     describe "with invalid information" do
 
       it "should not create a micropost" do
-        expect { click_button "Post" }.should_not change(Tvveet, :count)
+        expect { click_button "Post" }.not_to change(Tvveet, :count)
       end
 
       describe "error messages" do
@@ -25,7 +25,7 @@ describe "Tvveet pages" do
     describe "with valid information" do
       before { fill_in 'tvveet_content', with: "Lorem ipsum" }
       it "should create a micropost" do
-        expect { click_button "Post" }.should change(Tvveet, :count).by(1)
+        expect { click_button "Post" }.to change(Tvveet, :count).by(1)
       end
     end
   end
@@ -37,7 +37,7 @@ describe "Tvveet pages" do
       before { visit user_path(user) }
 
       it "should be able to delete a tvveet" do
-        expect { click_link 'delete' }.should change(Tvveet, :count).by(-1)
+        expect { click_link 'delete' }.to change(Tvveet, :count).by(-1)
       end
     end
   end

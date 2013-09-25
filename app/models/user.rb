@@ -10,7 +10,7 @@
 #
 
 class User < ActiveRecord::Base
-  attr_accessible :email, :name, :password, :password_confirmation
+  #attr_accessible :email, :name, :password, :password_confirmation
   has_secure_password
   has_many :tvveets, dependent: :destroy
 
@@ -37,7 +37,7 @@ class User < ActiveRecord::Base
   end
 
   def following?(other_user)
-    self.relationships.find_by_followed_id(other_user.id)
+    self.relationships.find_by(followed_id: other_user.id)
   end
 
   def follow!(other_user)
@@ -45,7 +45,7 @@ class User < ActiveRecord::Base
   end
 
   def unfollow!(other_user)
-    self.relationships.find_by_followed_id(other_user.id).destroy
+    self.relationships.find_by(followed_id: other_user.id).destroy
   end
 
   private

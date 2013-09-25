@@ -17,11 +17,11 @@ describe Relationship do
     its(:followed) { should == followed }
   end
 
-  describe "accessible attributes" do
+  pending "accessible attributes" do
     it "should not allow access to follower's id" do
       expect do
         Relationship.new(follower_id: follower.id)
-      end.should raise_error(ActiveModel::MassAssignmentSecurity::Error)
+      end.should raise_error(ActiveModel::ForbiddenAttributesProtection::Error)
     end
   end
 
@@ -33,7 +33,7 @@ describe Relationship do
         connections = follower.relationships
         follower.destroy
         connections.each do |relationship|
-          Relationship.find_by_follower_id(relationship.follower_id).should be_nil
+          Relationship.find_by(follower_id: relationship.follower_id).should be_nil
         end
       end
     end
@@ -41,7 +41,7 @@ describe Relationship do
     describe "destroy followed user" do
       before { followed.destroy }
       it "should be destroyed when followed user was being deleted" do
-        Relationship.find_by_followed_id(relationship.followed_id).should be_nil
+        Relationship.find_by(followed_id: relationship.followed_id).should be_nil
       end
     end
 

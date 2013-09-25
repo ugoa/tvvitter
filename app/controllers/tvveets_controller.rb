@@ -3,7 +3,7 @@ class TvveetsController < ApplicationController
   before_filter :correct_user, only: :destroy
 
   def create
-    @tvveet = current_user.tvveets.build(params[:tvveet])
+    @tvveet = current_user.tvveets.build(tvveet_params)
     if @tvveet.save
       flash[:success] = "Tvveet posted!"
       redirect_to root_path
@@ -21,7 +21,11 @@ class TvveetsController < ApplicationController
   private
 
   def correct_user
-    @tvveet = current_user.tvveets.find_by_id(params[:id])
+    @tvveet = current_user.tvveets.find_by(id: params[:id])
     redirect_to current_user if @tvveet.nil?
+  end
+
+  def tvveet_params
+    params.require(:tvveet).permit(:content)
   end
 end

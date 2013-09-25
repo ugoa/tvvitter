@@ -7,7 +7,7 @@ describe "User Pages" do
     before { visit signup_path }
 
     it { should have_selector('h1', :text => 'Sign up') }
-    it { should have_selector('title', :text => full_title('Sign up')) }
+    it { should have_title(full_title('Sign up')) }
   end
 
   describe "profile page" do
@@ -46,7 +46,7 @@ describe "User Pages" do
 
         describe "toggling the button" do
           before { click_button "Follow" }
-          it { should have_selector('input', value: 'Unfollow') }
+          it { should have_selector('input', exact: 'Unfollow') }
         end
       end
 
@@ -68,7 +68,7 @@ describe "User Pages" do
         end
         describe "toggling the button" do
           before { click_button "Unfollow" }
-          it { should have_selector('input', value: 'Follow') }
+          it { should have_selector('input', exact: 'Follow') }
         end
       end
     end
@@ -86,7 +86,7 @@ describe "User Pages" do
       describe "after submission" do
         before { click_button submit }
 
-        it { should have_selector('title', text: 'Sign up') }
+        it { should have_title('Sign up') }
         it { should have_error_message('error') }
       end
     end
@@ -105,8 +105,8 @@ describe "User Pages" do
 
       describe "after saving the user" do
         before { click_button submit }
-        let(:user) { User.find_by_email('user@example.com') }
-        it { should have_selector('title', text: user.name) }
+        let(:user) { User.find_by(email: 'user@example.com') }
+        it { should have_title(user.name) }
         it { should have_selector('div.alert.alert-success', text: 'Welcome') }
         it { should have_link('Sign out') }
       end
@@ -122,7 +122,7 @@ describe "User Pages" do
 
     describe "page" do
       it { should have_selector('h1', text: "Update your profile") }
-      it { should have_selector('title', text: "Edit user") }
+      it { should have_title("Edit user") }
       it { should have_link('change', href: 'http://gravatar.com/emails') }
     end
 
@@ -144,7 +144,7 @@ describe "User Pages" do
         click_button "Save changes"
       end
 
-      it { should have_selector('title', text: new_name) }
+      it { should have_title(new_name) }
       it { should have_selector('div.alert.alert-success') }
       it { should have_link('Sign out', href: signout_path) }
       specify { user.reload.name.should == new_name }
