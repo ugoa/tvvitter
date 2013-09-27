@@ -47,14 +47,6 @@ describe User do
     it { should be_admin }
   end
 
-  pending "unaccessible attributes" do
-    it 'should not allow access to :admin' do
-      expect do
-        User.new(amdin: true)
-      end.to raise_error(ActiveModel::ForbiddenAttributesProtection)
-    end
-  end
-
   describe "tvveets associations" do
     before { @user.save }
 

@@ -227,12 +227,8 @@ describe "User Pages" do
 
       it { should have_error_message("Invalid") }
 
-      pending "sending post request to user_path " do
-        let(:new_user) { FactoryGirl.build(:user) }
-
-        before do
-          post :create, user: @new_user
-        end
+      describe "sending post request to user_path " do
+        before { post users_path }
 
         it { should have_error_message("Invalid") }
       end

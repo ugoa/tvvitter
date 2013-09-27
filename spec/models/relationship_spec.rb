@@ -17,14 +17,6 @@ describe Relationship do
     its(:followed) { should == followed }
   end
 
-  pending "accessible attributes" do
-    it "should not allow access to follower's id" do
-      expect do
-        Relationship.new(follower_id: follower.id)
-      end.should raise_error(ActiveModel::ForbiddenAttributesProtection::Error)
-    end
-  end
-
   describe "destroy dependency" do
 
     # the next twe examples use different ideas.

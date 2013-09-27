@@ -14,14 +14,6 @@ describe Tvveet do
 
   it { should be_valid }
 
-  pending "accessible attributes" do
-    it "should not allow access to user_id" do
-      expect do
-        Tvveet.new(user_id: user.id)
-      end.should raise_error(ActiveModel::ForbiddenAttributesProtection::Error)
-    end
-  end
-
   describe "when user_id is not present" do
     before { @tvveet.user_id = nil }
 
