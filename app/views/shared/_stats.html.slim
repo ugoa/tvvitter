@@ -1,0 +1,9 @@
+- @user ||= current_user
+- @fans_count = @user.followers.count
+.stats
+  a href=following_user_path(@user) 
+    strong#following.stat= @user.followed_users.count
+    | following
+  a href=followers_user_path(@user) 
+    strong#followers.stat= @fans_count
+    = "follower".pluralize(@fans_count)

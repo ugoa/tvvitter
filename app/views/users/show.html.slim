@@ -1,0 +1,17 @@
+- provide(:title, @user.name)
+.row
+  aside.span4
+    section
+      h1
+        = gravatar_for @user
+        = @user.name
+    section
+      = render "shared/stats"
+  .span8
+    = render 'follow_form' if signed_in?
+    - if @user.tvveets.any?
+      h3
+        | Tvveets (#{@user.tvveets.count})
+      ol.tvveets
+        = render @tvveets
+      = will_paginate @tvveets

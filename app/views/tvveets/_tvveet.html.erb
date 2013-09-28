@@ -1,7 +1,0 @@
-<li>
-  <%=	render 'shared/content', tvveet: tvveet %>
-
-  <% if current_user?(tvveet.user) %>
-    <%=	link_to "delete", tvveet, method: :delete, data: { confirm: "You sure?"}, title: tvveet.content %>
-  <% end %>
-</li>
