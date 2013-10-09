@@ -13,5 +13,9 @@ FactoryGirl.define do
   factory :tvveet do
     content "Lorem ipsum"
     user
+
+    factory :empty_content do
+      content nil
+    end
   end
 end

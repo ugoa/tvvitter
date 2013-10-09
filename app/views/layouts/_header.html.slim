@@ -16,8 +16,5 @@ header.navbar.navbar-fixed-top.navbar-inverse
                 li= link_to "Settings", edit_user_path(current_user)
                 li.divider
                 li= link_to "Sign out", signout_path, method: "delete"
-            /! <li><haml:loud> link_to &amp;quot;Profile&amp;quot;, current_user </haml:loud></li
-            /! <li><haml:loud> link_to &amp;quot;Settings&amp;quot;, edit_user_path(current_user) </haml:loud></li
-            /! <li><haml:loud> link_to &amp;quot;Sign out&amp;quot;, signout_path, method: &amp;quot;delete&amp;quot; </haml:loud></li
           - else
             li= link_to "Sign in", signin_path
